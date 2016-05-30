@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Numbers into words</title>
+  </head>
+  <body>
+    <script>
+      var ones = ['','one','two','three','four','five','six','seven','eight','nine'];
+      var tens = ['twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+      var tenones = ['ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+
+    function printWord(digit)
+    {
+      if (digit<10){
+        return ones[digit];
+      }
+      else if(digit<20){
+         onesPlace=digit%10;
+         return tenones[onesPlace];
+      }
+      else if(digit<100){
+         tensDigit=Math.floor(digit/10);
+         onesDigit=digit%10;
+         return tens[tensDigit-2]+' '+ ones[onesDigit];
+      }
+      else if(digit<1000){
+         firstDigit=Math.floor(digit/100);
+         remainder=digit%100;
+         return ones[firstDigit] + ' hundred '+ printWord(remainder);
+      }
+      else if(digit<1000000){
+        firstThree=Math.floor(digit/1000);
+        lastThree=digit%1000;
+        return printWord(firstThree) + ' thousand ' + printWord(lastThree);
+      }
+      else if(digit<1000000000){
+        iniDigits=Math.floor(digit/1000000);
+        lasDigits=digit%1000000;
+        return printWord(iniDigits) + ' million ' + printWord(lasDigits);
+      }
+    }
+
+    var input = prompt("Enter the number:");
+    document.write(input + ' --> ' + printWord(input));
+
+    </script>
+  </body>
+</html>
